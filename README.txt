@@ -1,0 +1,1 @@
+Sitio web DENKAR listo para publicar en www.denkar.cl. Sube estos archivos a Netlify, Vercel, Cloudflare Pages o un hosting tradicional y apunta los DNS desde NIC Chile.

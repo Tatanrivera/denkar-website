@@ -1,0 +1,1 @@
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();document.getElementById('msg').textContent='Gracias. La solicitud quedó registrada para la siguiente etapa de configuración.';e.target.reset();});
