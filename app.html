@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0b">
+<title>DENKAR | Mi día</title>
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--ink:#111;--muted:#6b7280;--line:#e7e7ea;--dark:#0d0d0f;--accent:#b87333;--danger:#b42318;--shadow:0 12px 30px rgba(0,0,0,.08)}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--bg);padding-bottom:96px}button,input{font:inherit}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(245,245,247,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.05)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em}.brand-k{width:34px;height:34px;border-radius:10px;background:var(--dark);color:white;display:grid;place-items:center;font-size:20px;font-weight:900}.avatar{width:36px;height:36px;border-radius:50%;background:#dedee3;display:grid;place-items:center;font-weight:700}
+main{padding:18px;max-width:760px;margin:0 auto}.eyebrow{font-size:12px;letter-spacing:.16em;color:var(--accent);font-weight:800;margin:0 0 8px}h1{font-size:34px;line-height:1.02;letter-spacing:-.04em;margin:0}.date{color:var(--muted);margin:8px 0 22px}
+.summary{background:var(--dark);color:white;border-radius:24px;padding:22px;box-shadow:var(--shadow);margin-bottom:20px}.summary h2{margin:0 0 8px;font-size:24px}.summary p{margin:0;color:#c7c7cc;line-height:1.5}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.stat{background:#19191d;border:1px solid #2b2b30;border-radius:16px;padding:14px}.stat strong{display:block;font-size:24px}.stat span{display:block;color:#a8a8af;font-size:12px;margin-top:4px}
+.section{margin:24px 0}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.section-head h2{font-size:21px;margin:0}.link{border:0;background:transparent;color:var(--accent);font-weight:700}
+.task{display:grid;grid-template-columns:26px 1fr auto;gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:10px}.task input{width:20px;height:20px;margin-top:2px}.task strong{display:block}.task small{display:block;color:var(--muted);margin-top:5px;line-height:1.35}.tag{font-size:11px;font-weight:800;padding:6px 8px;border-radius:999px;background:#f2e7dc;color:#8d4f17;white-space:nowrap}.tag.red{background:#fee4e2;color:var(--danger)}
+.meeting{display:grid;grid-template-columns:62px 1fr;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:10px}.time{font-weight:800;color:var(--accent)}.meeting small{color:var(--muted);display:block;margin-top:5px}
+.goal{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:10px}.goal-top{display:flex;justify-content:space-between;gap:12px}.goal span{font-size:13px;color:var(--muted)}.progress{height:9px;background:#ececf0;border-radius:999px;margin-top:12px;overflow:hidden}.progress i{display:block;height:100%;background:var(--dark)}
+.quick-add{position:fixed;right:18px;bottom:88px;z-index:30;border:0;background:var(--dark);color:white;width:58px;height:58px;border-radius:50%;font-size:30px;box-shadow:0 14px 30px rgba(0,0,0,.28)}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:25;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+.navbtn{border:0;background:transparent;padding:8px 4px;color:#797980;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px}.navbtn b{font-size:19px}.navbtn.active{color:var(--ink);font-weight:800}
+dialog{border:0;border-radius:22px;padding:0;width:min(92vw,520px);box-shadow:0 30px 90px rgba(0,0,0,.35)}dialog::backdrop{background:rgba(0,0,0,.45)}.modal{padding:22px}.modal h3{margin:0 0 16px;font-size:23px}.modal input{width:100%;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}.modal-actions{display:flex;gap:10px;justify-content:flex-end}.btn{border:1px solid var(--ink);border-radius:999px;padding:11px 16px;font-weight:800}.btn.primary{background:var(--dark);color:white}.btn.secondary{background:white}
+@media(min-width:700px){h1{font-size:48px}.content-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}.quick-add{right:calc((100vw - 760px)/2 + 18px)}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="brand"><span class="brand-k">K</span><span>DENKAR</span></div><div class="avatar">DR</div></header>
+<main>
+<p class="eyebrow">MI PLAN DE ACCIÓN</p><h1>Hoy</h1><p class="date" id="todayDate"></p>
+<section class="summary"><h2>Tu día está bajo control.</h2><p>Tienes 3 prioridades críticas, 2 reuniones y 1 entregable que requiere seguimiento.</p><div class="stats"><div class="stat"><strong id="openTasks">3</strong><span>prioridades</span></div><div class="stat"><strong>2</strong><span>reuniones</span></div><div class="stat"><strong>1</strong><span>alerta</span></div></div></section>
+<div class="content-grid"><div>
+<section class="section"><div class="section-head"><h2>Prioridades</h2><button class="link" onclick="openAdd()">Agregar</button></div><div id="taskList">
+<label class="task"><input type="checkbox" onchange="updateCount()"><span><strong>Preparar reunión estratégica</strong><small>Revisar antecedentes y definir tres decisiones clave.</small></span><span class="tag">10:30</span></label>
+<label class="task"><input type="checkbox" onchange="updateCount()"><span><strong>Revisar licitación</strong><small>Faltan dos antecedentes críticos. Vence en 72 horas.</small></span><span class="tag red">Crítico</span></label>
+<label class="task"><input type="checkbox" onchange="updateCount()"><span><strong>Reactivar cuenta sin contacto</strong><small>45 días sin actividad comercial.</small></span><span class="tag">Cliente</span></label>
+</div></section>
+<section class="section"><div class="section-head"><h2>Agenda</h2><button class="link">Ver calendario</button></div><div class="meeting"><span class="time">10:30</span><span><strong>Reunión estratégica</strong><small>Cliente clave · Videollamada</small></span></div><div class="meeting"><span class="time">15:00</span><span><strong>Revisión de forecast</strong><small>Equipo comercial · 45 min</small></span></div></section>
+</div><div>
+<section class="section"><div class="section-head"><h2>Objetivos</h2><button class="link">Editar</button></div><div class="goal"><div class="goal-top"><strong>Cerrar plan comercial trimestral</strong><span>68%</span></div><div class="progress"><i style="width:68%"></i></div></div><div class="goal"><div class="goal-top"><strong>Actualizar cuentas estratégicas</strong><span>42%</span></div><div class="progress"><i style="width:42%"></i></div></div></section>
+<section class="section"><div class="section-head"><h2>Alerta DENKAR</h2></div><div class="goal"><strong>Riesgo detectado en el forecast</strong><p style="color:var(--muted);line-height:1.45;margin:8px 0 0">Dos oportunidades relevantes no tienen próximo paso definido.</p></div></section>
+</div></div></main>
+<button class="quick-add" onclick="openAdd()">+</button>
+<nav class="bottom"><button class="navbtn active"><b>⌂</b><span>Hoy</span></button><button class="navbtn"><b>✓</b><span>Tareas</span></button><button class="navbtn"><b>▦</b><span>Calendario</span></button><button class="navbtn"><b>●</b><span>Perfil</span></button></nav>
+<dialog id="taskDialog"><form method="dialog" class="modal" onsubmit="addTask(event)"><h3>Nueva prioridad</h3><input id="taskTitle" placeholder="¿Qué necesitas hacer?" required><input id="taskDetail" placeholder="Detalle o próximo paso"><div class="modal-actions"><button class="btn secondary" value="cancel">Cancelar</button><button class="btn primary" value="default">Agregar</button></div></form></dialog>
+<script>
+const fmt=new Intl.DateTimeFormat('es-CL',{weekday:'long',day:'numeric',month:'long'});
+document.getElementById('todayDate').textContent=fmt.format(new Date()).replace(/^./,c=>c.toUpperCase());
+function openAdd(){document.getElementById('taskDialog').showModal();setTimeout(()=>document.getElementById('taskTitle').focus(),100)}
+function addTask(e){e.preventDefault();const t=document.getElementById('taskTitle').value.trim(),d=document.getElementById('taskDetail').value.trim()||'Sin detalle adicional.';if(!t)return;const x=document.createElement('label');x.className='task';x.innerHTML=`<input type="checkbox" onchange="updateCount()"><span><strong>${esc(t)}</strong><small>${esc(d)}</small></span><span class="tag">Nueva</span>`;document.getElementById('taskList').appendChild(x);document.getElementById('taskTitle').value='';document.getElementById('taskDetail').value='';document.getElementById('taskDialog').close();updateCount()}
+function updateCount(){const c=[...document.querySelectorAll('#taskList input[type="checkbox"]')];document.getElementById('openTasks').textContent=c.filter(x=>!x.checked).length;c.forEach(x=>{x.closest('.task').style.opacity=x.checked?'.48':'1';x.closest('.task').querySelector('strong').style.textDecoration=x.checked?'line-through':'none'})}
+function esc(v){return v.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+</script>
+</body></html>
